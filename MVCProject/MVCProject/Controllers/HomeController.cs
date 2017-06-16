@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,25 @@ namespace MVCProject.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        // создаем контекст данных
+        AddressContext db = new AddressContext();
+
+        public ActionResult Index(int page = 1)
         {
-            return View();
-        }
+            // получаем из бд все объекты Book
+            IEnumerable<Address> addreses = db.Addreses;
+            // передаем все объекты в динамическое свойство Books в ViewBag
+            ViewBag.Addreses = addreses;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            int pageSize = 100; // количество объектов на страницу
 
-            return View();
-        }
+            //пагинация
+            IEnumerable<Address> addressPerPages = addreses.Skip((page - 1) * pageSize).Take(pageSize);
+            PageAddress pageAddress = new PageAddress { PageNumber = page, PageSize = pageSize, TotalItems = addreses.Count() };
+            IndexViewModel ivm = new IndexViewModel { PageAddress = pageAddress, Addreses = addressPerPages };
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            // возвращаем представление
+            return View(ivm);
         }
     }
 }

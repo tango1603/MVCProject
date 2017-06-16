@@ -16,6 +16,30 @@
     white-space: normal;
 }
 
+.head {
+    text-align: center;
+    font-size: 30px;
+}
+
+th {
+    text-align: center;
+}
+
+
+.th {
+    text-align: center;
+    font-size: 20px;
+}
+
+table {
+    text-align: center;
+}
+
+.conteiner {
+    padding: 50px;
+}
+
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
