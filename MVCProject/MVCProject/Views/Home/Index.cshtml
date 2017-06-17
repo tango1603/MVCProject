@@ -1,46 +1,32 @@
-﻿@{
+﻿@model MVCProject.Models.IndexViewModel
+@using MVCProject.Helpers
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@model MVCProject.Models.IndexViewModel
-@using MVCProject.Helpers
-
-<div class="conteiner">
-    <div class="row">
-        <div class="head"> Почтовые адреса</div>
-    </div>
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>№ п/п</th>
-                    <th>Страна</th>
-                    <th>Город</th>
-                    <th>Улица</th>
-                    <th>Номер дома</th>
-                    <th>Индекс</th>
-                    <th>Дата и время</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var a in ViewBag.Addreses)
-                {
-                    <tr>
-                        <td><p>@a.Id</p></td>
-                        <td><p>@a.Country</p></td>
-                        <td><p>@a.City</p></td>
-                        <td><p>@a.Stereet</p></td>
-                        <td><p>@a.BuildingNumber</p></td>
-                        <td><p>@a.PostID</p></td>
-                        <td><p>@a.DateTime</p></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        <div class="btn-group">
-            @Html.PageLinks(Model.PageAddress, x => Url.Action("Index", new { page = x }))
-        </div>
-    </div>
+<table class="table">
+    <tr>
+        <td>№ п/п</td>
+        <td>Страна</td>
+        <td>Город</td>
+        <td>Улица</td>
+        <td>Номер дома</td>
+        <td>Индекс</td>
+        <td>Дата и время</td>
+    </tr>
+    @foreach (var address in Model.Addreses)
+    {
+        <tr>
+            <td><p>@address.Id</p></td>
+            <td><p>@address.Country</p></td>
+            <td><p>@address.City</p></td>
+            <td><p>@address.Stereet</p></td>
+            <td><p>@address.BuildingNumber</p></td>
+            <td><p>@address.PostID</p></td>
+            <td><p>@address.DateTime</p></td>
+        </tr>
+    }
+</table>
+<br />
+<div class="btn-group">
+    @Html.PageLinks(Model.PageAddress, x => Url.Action("Index", new { page = x }))
 </div>
