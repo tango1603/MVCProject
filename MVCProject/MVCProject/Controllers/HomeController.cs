@@ -14,9 +14,12 @@ namespace MVCProject.Controllers
             return View();
         }
 
-        public ActionResult Table() // Retrive & Display Tabuler Data
+        public ActionResult getData()
         {
-            return View();
+            using (AddressContext dc = new AddressContext())
+            {
+                return Json(dc.Addreses.ToList());
+            }
         }
     }
 }
