@@ -1,46 +1,9 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
 }
 
-@model MVCProject.Models.IndexViewModel
-@using MVCProject.Helpers
-
-<div class="conteiner">
-    <div class="row">
-        <div class="head"> Почтовые адреса</div>
-    </div>
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>№ п/п</th>
-                    <th>Страна</th>
-                    <th>Город</th>
-                    <th>Улица</th>
-                    <th>Номер дома</th>
-                    <th>Индекс</th>
-                    <th>Дата и время</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var a in ViewBag.Addreses)
-                {
-                    <tr>
-                        <td><p>@a.Id</p></td>
-                        <td><p>@a.Country</p></td>
-                        <td><p>@a.City</p></td>
-                        <td><p>@a.Stereet</p></td>
-                        <td><p>@a.BuildingNumber</p></td>
-                        <td><p>@a.PostID</p></td>
-                        <td><p>@a.DateTime</p></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="row">
-        <div class="btn-group">
-            @Html.PageLinks(Model.PageAddress, x => Url.Action("Index", new { page = x }))
-        </div>
-    </div>
+<h2>Index</h2>
+<div ng-controller="HomeController">
+    {{Message}}
 </div>
+
