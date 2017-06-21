@@ -1,21 +1,95 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Angular таблица";
 }
-<h2>Index</h2>
-@* CSS *@
-<link href="~/css/bootstrap.css" rel="stylesheet" />
-<link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
-@* JS for angularJS and Datatable *@
-<script src="~/Scripts/jquery.js"></script>
-<script src="~/Scripts/jquery.dataTables.js"></script>
-<script src="~/Scripts/angular.js"></script>
-<script src="~/Scripts/angular-datatables.js"></script>
-@* JS for our angularjs module, controller etc. *@
-<script src="~/Scripts/myApp.js"></script>
-@* HTML *@
 
-<div ng-app="MyApp" class="container">
-    <div ng-controller="HomeController">
-        <table id="entry-grid" datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-hover"></table>
+
+<div ng-controller="TableAddressController" class="container theme-showcase" role="main">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <h2 class="text-center"><strong>Список адресов</strong></h2>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="content">
+        <table class="table table-hover">
+            <tr>
+                <th class="text-center col-xs-1">
+                    <div class="form-group">
+                        <label class="text-center" for="id">№ п/п</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_id">
+                    </div>
+                </th>
+                <th class="text-center col-xs-2">
+                    <div class="form-group">
+                        <label class="text-center" for="id">Страна</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_country">
+                    </div>
+                </th>
+                <th class="text-center col-xs-2">
+                    <div class="form-group">
+                        <label class="text-center" for="id">Город</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_city">
+                    </div>
+                </th>
+                <th class="text-center col-xs-2">
+                    <div class="form-group">
+                        <label class="text-center" for="id">Улица</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_stereet">
+                    </div>
+                </th>
+                <th class="text-center col-xs-1">
+                    <div class="form-group">
+                        <label class="text-center" for="id">№ дома</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_building_number">
+                    </div>
+                </th>
+                <th class="text-center col-xs-1">
+                    <div class="form-group">
+                        <label class="text-center" for="id">Индекс</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_post_id">
+                    </div>
+                </th>
+                <th class="text-center col-xs-2">
+                    <div class="form-group">
+                        <label class="text-center" for="id">Дата и время</label>
+                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_date_time">
+                    </div>
+                </th>
+            </tr>
+            <tr ng-repeat="address in Addresses | startFrom: startingItem() | limitTo: itemsPerPage |
+                filter:{Id:query_id,
+                        Country:query_country,
+                        City:query_city,
+                        Stereet:query_stereet,
+                        BuildingNumber:query_building_number,
+                        PostID:query_post_id,
+                        DateTime:query_date_time
+                        }" ng-class-odd="'odd'" ng-class-even="'even'">
+                <td class="text-center">{{address.Id}}</td>
+                <td class="text-center">{{address.Country}}</td>
+                <td class="text-center">{{address.City}}</td>
+                <td class="text-center">{{address.Stereet}}</td>
+                <td class="text-center">{{address.BuildingNumber}}</td>
+                <td class="text-center">{{address.PostID}}</td>
+                <td class="text-center">{{address.DateTime | date: 'dd-MM-yyyy'}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="page-header">
+    </div>
+    <div class="navbar navbar-inverse">
+        <div id="pagination" class="pagination">
+            <button class="pull-left btn btn-success btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Назад</button>
+            <button type="button" class="btn btn-info btn-lg disabled">{{currentPage+1}} из {{numberOfPages()}}</button>
+            <button class="pull-right  btn btn-success btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
+        </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/Scripts/AngularController/TableAddressController.js"></script>
+}

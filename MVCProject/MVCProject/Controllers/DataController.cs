@@ -14,7 +14,7 @@ namespace MVCProject.Controllers
              List<Address> address = new List<Address>();
               using (AddressContext ac = new AddressContext())
             {
-                address = ac.Addreses.OrderBy(a => a.Country).ToList();
+                address = ac.Addreses.ToList();
             }
             return new JsonResult { Data = address, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
