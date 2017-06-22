@@ -7,59 +7,91 @@
     <div class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h2 class="text-center"><strong>Список адресов</strong></h2>
+                <h2 class="text-center"><strong>Список адресов</strong></h2> 
             </div>
         </div>
     </div>
 
-
+    
     <div id="content">
         <table class="table table-hover">
-            <tr>
-                <th class="text-center col-xs-1">
-                    <div class="form-group">
-                        <label class="text-center" for="id">№ п/п</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_id">
-                    </div>
-                </th>
-                <th class="text-center col-xs-2">
-                    <div class="form-group">
-                        <label class="text-center" for="id">Страна</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_country">
-                    </div>
-                </th>
-                <th class="text-center col-xs-2">
-                    <div class="form-group">
-                        <label class="text-center" for="id">Город</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_city">
-                    </div>
-                </th>
-                <th class="text-center col-xs-2">
-                    <div class="form-group">
-                        <label class="text-center" for="id">Улица</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_stereet">
-                    </div>
-                </th>
-                <th class="text-center col-xs-1">
-                    <div class="form-group">
-                        <label class="text-center" for="id">№ дома</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_building_number">
-                    </div>
-                </th>
-                <th class="text-center col-xs-1">
-                    <div class="form-group">
-                        <label class="text-center" for="id">Индекс</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_post_id">
-                    </div>
-                </th>
-                <th class="text-center col-xs-2">
-                    <div class="form-group">
-                        <label class="text-center" for="id">Дата и время</label>
-                        <input type="text" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_date_time">
-                    </div>
-                </th>
-            </tr>
-            <tr ng-repeat="address in Addresses | startFrom: startingItem() | limitTo: itemsPerPage |
+            <thead>
+                <tr>
+                    <td class="text-center col-xs-1">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'Id'; sortReverse = !sortReverse ">
+                                <label value="set color" ng-click="IdStyle={color:'blue'}"  class="text-center" for="id">№ п/п</label>
+                                <span ng-show="sortType == 'Id' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'Id' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                            <input type="number" ng-model="string" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_id">
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-2">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'Country'; sortReverse = !sortReverse">
+                                <label value="set color" ng-click="CountryStyle={color:'blue'}" class="text-center" for="country">Страна</label>
+                                    <span ng-show="sortType == 'Country' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                    <span ng-show="sortType == 'Country' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                            <input type="text" class="form-control text-center" id="country" placeholder="Фильтр" ng-model="query_country">
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-2">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'City'; sortReverse = !sortReverse">
+                                <label class="text-center" for="city">Город</label>
+                                <span ng-show="sortType == 'City' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'City' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                            <input type="text" class="form-control text-center" id="city" placeholder="Фильтр" ng-model="query_city">
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-2">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'Stereet'; sortReverse = !sortReverse">
+                                <label class="text-center" for="stereet">Улица</label>
+                                <span ng-show="sortType == 'Stereet' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'Stereet' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                            <input type="text" class="form-control text-center" id="stereet" placeholder="Фильтр" ng-model="query_stereet">
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-1">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'BuildingNumber'; sortReverse = !sortReverse">
+                                <label class="text-center" for="building_number">№ дома</label>
+                                <span ng-show="sortType == 'BuildingNumber' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'BuildingNumber' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                            <input type="number" class="form-control text-center" id="building_number" placeholder="Фильтр" ng-model="query_building_number">
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-1">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'PostID'; sortReverse = !sortReverse">
+                                <label class="text-center" for="post_id">Индекс</label>
+                                <span ng-show="sortType == 'PostID' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'PostID' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>
+                            <input type="number" class="form-control text-center" id="post_id" placeholder="Фильтр" ng-model="query_post_id">
+                        </div>
+                    </td>
+                    <td class="text-center col-xs-2">
+                        <div class="form-group">
+                            <a href="#" ng-click="sortType = 'DateTime'; sortReverse = !sortReverse">
+                                <label class="text-center" for="date_time">Дата и время</label>
+                                <span ng-show="sortType == 'DateTime' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'DateTime' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                            </a>                            
+                            <input type="datetime-local" class="form-control text-center" id="date_time" placeholder="Фильтр" ng-model="query_date_time">
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+
+                       
+            <tr ng-repeat="address in Addresses | orderBy:sortType:sortReverse | startFrom: startingItem() | limitTo: itemsPerPage |
                 filter:{Id:query_id,
                         Country:query_country,
                         City:query_city,
@@ -68,8 +100,8 @@
                         PostID:query_post_id,
                         DateTime:query_date_time
                         }" ng-class-odd="'odd'" ng-class-even="'even'">
-                <td class="text-center">{{address.Id}}</td>
-                <td class="text-center">{{address.Country}}</td>
+                <td class="text-center"><span ng-style="IdStyle">{{address.Id}}</span></td>
+                <td class="text-center"><span ng-style="CountryStyle">{{address.Country}}</span></td>
                 <td class="text-center">{{address.City}}</td>
                 <td class="text-center">{{address.Stereet}}</td>
                 <td class="text-center">{{address.BuildingNumber}}</td>
@@ -81,14 +113,15 @@
 
     <div class="page-header">
     </div>
-    <div class="navbar navbar-inverse">
-        <div id="pagination" class="pagination">
+    <div class="navbar navbar-inverse text-center">
+        <div id="pagination" class="pagination ">
             <button class="pull-left btn btn-success btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Назад</button>
             <button type="button" class="btn btn-info btn-lg disabled">{{currentPage+1}} из {{numberOfPages()}}</button>
             <button class="pull-right  btn btn-success btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
         </div>
-    </div>
+    </div>  
 </div>
+
 
 @section scripts{
     <script src="~/Scripts/AngularController/TableAddressController.js"></script>

@@ -148,7 +148,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AddressContext.cs" />
     <Compile Include="Models\AddressDbInitializer.cs" />
@@ -189,6 +188,7 @@
     <Content Include="Scripts\AngularController\TableAddressController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\DTPJS.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />

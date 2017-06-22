@@ -1,15 +1,24 @@
 ﻿angular.module('MyApp')
     .controller('TableAddressController', function ($scope, AddressService) {
-        $scope.currentPage = 0;
-        $scope.itemsPerPage = 10;
 
+        //Фильтр 
+        $scope.sortType = 'Id'; // значение сортировки по умолчанию
+        $scope.sortReverse = false;  // обратная сортривка
+
+
+        //Данные
         $scope.Addresses = null;
         AddressService.GetAddressList().then(function (d) {
-            $scope.Addresses = d.data; //Success callback
+            $scope.Addresses = d.data; 
         }, function (error) {
-            alert('Error!'); // Failed Callback
+            alert('Error!'); 
         });
 
+
+        //Пагинация
+
+        $scope.currentPage = 0;
+        $scope.itemsPerPage = 10;
         $scope.firstPage = function () {
             return $scope.currentPage == 0;
         }
@@ -37,13 +46,11 @@
             return input.slice(start);
         }
     })
-
-
-
+        
     .factory('AddressService', function ($http) {
         var fac = {};
         fac.GetAddressList = function () {
             return $http.get('/Data/GetAddressList');
         }
         return fac;
-    });
+    });   
