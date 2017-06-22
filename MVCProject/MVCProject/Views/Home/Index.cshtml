@@ -7,12 +7,12 @@
     <div class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <h2 class="text-center"><strong>Список адресов</strong></h2> 
+                <h2 class="text-center"><strong>Список адресов</strong></h2>
             </div>
         </div>
     </div>
 
-    
+
     <div id="content">
         <table class="table table-hover">
             <thead>
@@ -20,19 +20,19 @@
                     <td class="text-center col-xs-1">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'Id'; sortReverse = !sortReverse ">
-                                <label value="set color" ng-click="IdStyle={color:'blue'}"  class="text-center" for="id">№ п/п</label>
+                                <label ng-click='setColorId()' class="text-center" for="id">№ п/п</label>
                                 <span ng-show="sortType == 'Id' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
                                 <span ng-show="sortType == 'Id' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
                             </a>
-                            <input type="number" ng-model="string" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_id">
+                            <input type="number" class="form-control text-center" id="id" placeholder="Фильтр" ng-model="query_id">
                         </div>
                     </td>
                     <td class="text-center col-xs-2">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'Country'; sortReverse = !sortReverse">
-                                <label value="set color" ng-click="CountryStyle={color:'blue'}" class="text-center" for="country">Страна</label>
-                                    <span ng-show="sortType == 'Country' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
-                                    <span ng-show="sortType == 'Country' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
+                                <label ng-click='setColorCountry()' class="text-center" for="country">Страна</label>
+                                <span ng-show="sortType == 'Country' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
+                                <span ng-show="sortType == 'Country' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
                             </a>
                             <input type="text" class="form-control text-center" id="country" placeholder="Фильтр" ng-model="query_country">
                         </div>
@@ -40,7 +40,7 @@
                     <td class="text-center col-xs-2">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'City'; sortReverse = !sortReverse">
-                                <label class="text-center" for="city">Город</label>
+                                <label ng-click='setColorCity()' class="text-center" for="city">Город</label>
                                 <span ng-show="sortType == 'City' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
                                 <span ng-show="sortType == 'City' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
                             </a>
@@ -50,7 +50,7 @@
                     <td class="text-center col-xs-2">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'Stereet'; sortReverse = !sortReverse">
-                                <label class="text-center" for="stereet">Улица</label>
+                                <label ng-click='setColorStereet()' class="text-center" for="stereet">Улица</label>
                                 <span ng-show="sortType == 'Stereet' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
                                 <span ng-show="sortType == 'Stereet' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
                             </a>
@@ -60,7 +60,7 @@
                     <td class="text-center col-xs-1">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'BuildingNumber'; sortReverse = !sortReverse">
-                                <label class="text-center" for="building_number">№ дома</label>
+                                <label ng-click='setColorBuildingNumber()' class="text-center" for="building_number">№ дома</label>
                                 <span ng-show="sortType == 'BuildingNumber' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
                                 <span ng-show="sortType == 'BuildingNumber' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
                             </a>
@@ -70,7 +70,7 @@
                     <td class="text-center col-xs-1">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'PostID'; sortReverse = !sortReverse">
-                                <label class="text-center" for="post_id">Индекс</label>
+                                <label ng-click='setColorPostID()' class="text-center" for="post_id">Индекс</label>
                                 <span ng-show="sortType == 'PostID' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
                                 <span ng-show="sortType == 'PostID' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
                             </a>
@@ -80,17 +80,17 @@
                     <td class="text-center col-xs-2">
                         <div class="form-group">
                             <a href="#" ng-click="sortType = 'DateTime'; sortReverse = !sortReverse">
-                                <label class="text-center" for="date_time">Дата и время</label>
+                                <label ng-click='setColorDateTime()' class="text-center" for="date_time">Дата и время</label>
                                 <span ng-show="sortType == 'DateTime' && !sortReverse" class="glyphicon glyphicon-arrow-down"></span>
                                 <span ng-show="sortType == 'DateTime' && sortReverse" class="glyphicon glyphicon-arrow-up"></span>
-                            </a>                            
+                            </a>
                             <input type="datetime-local" class="form-control text-center" id="date_time" placeholder="Фильтр" ng-model="query_date_time">
                         </div>
                     </td>
                 </tr>
             </thead>
 
-                       
+
             <tr ng-repeat="address in Addresses | orderBy:sortType:sortReverse | startFrom: startingItem() | limitTo: itemsPerPage |
                 filter:{Id:query_id,
                         Country:query_country,
@@ -100,13 +100,13 @@
                         PostID:query_post_id,
                         DateTime:query_date_time
                         }" ng-class-odd="'odd'" ng-class-even="'even'">
-                <td class="text-center"><span ng-style="IdStyle">{{address.Id}}</span></td>
-                <td class="text-center"><span ng-style="CountryStyle">{{address.Country}}</span></td>
-                <td class="text-center">{{address.City}}</td>
-                <td class="text-center">{{address.Stereet}}</td>
-                <td class="text-center">{{address.BuildingNumber}}</td>
-                <td class="text-center">{{address.PostID}}</td>
-                <td class="text-center">{{address.DateTime | date: 'dd-MM-yyyy'}}</td>
+                <td class="text-center"><p ng-style="colorId">{{address.Id}}</p></td>
+                <td class="text-center"><p ng-style="colorCountry">{{address.Country}}</td>
+                <td class="text-center"><p ng-style="colorCity">{{address.City}}</td>
+                <td class="text-center"><p ng-style="colorStereet">{{address.Stereet}}</td>
+                <td class="text-center"><p ng-style="colorBuildingNumber">{{address.BuildingNumber}}</td>
+                <td class="text-center"><p ng-style="colorPostID">{{address.PostID}}</td>
+                <td class="text-center"><p ng-style="colorDateTime">{{address.DateTime | date: 'dd-MM-yyyy'}}</td>
             </tr>
         </table>
     </div>
@@ -119,7 +119,7 @@
             <button type="button" class="btn btn-info btn-lg disabled">{{currentPage+1}} из {{numberOfPages()}}</button>
             <button class="pull-right  btn btn-success btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
         </div>
-    </div>  
+    </div>
 </div>
 
 
